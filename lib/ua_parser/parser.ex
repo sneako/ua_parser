@@ -18,7 +18,7 @@ defmodule UAParser.Parser do
     patterns
     |> search(user_agent)
     |> OperatingSystem.parse()
-    |> String.downcase()
+    |> downcase()
   end
 
   defp sanitize(user_agent), do: String.trim(user_agent)
@@ -31,4 +31,7 @@ defmodule UAParser.Parser do
       match -> {group, match}
     end
   end
+
+  defp downcase(str) when is_binary(str), do: String.downcase(str)
+  defp downcase(other), do: other
 end
