@@ -14,55 +14,23 @@ defmodule UAParser.Processor do
     |> compile
   end
 
-  defp atom_key(key) do
-    key
-    |> String.Chars.to_string()
-    |> String.to_atom()
-  end
-
-  defp compile(groups) do
-    # result: {user_agents, os, devices}
-    groups
-    |> Enum.map(&compile_groups/1)
-    |> to_tuple
-  end
-
-  defp compile_group(group) do
-    pattern =
-      group
-      |> Map.fetch!(:regex)
-      |> Regex.compile!()
-
-    Map.put(group, :regex, pattern)
-  end
-
-  defp compile_groups(groups), do: Enum.map(groups, &compile_group/1)
-
-  defp convert([]), do: []
-
-  defp convert([head | tail]) do
-    result = Enum.map(head, fn x -> x |> to_keyword() |> Map.new() end)
-    [result | convert(tail)]
-  end
-
   defp extract([document | _]) do
     [_, {'os_parsers', os}, _] = document
 
-    [[], os, []]
+    os
   end
 
-  defp to_keyword([]), do: []
-
-  defp to_keyword([{key, value} | tails]) do
-    keyword = {atom_key(key), String.Chars.to_string(value)}
-    [keyword | to_keyword(tails)]
+  defp convert(list) do
+    Enum.map(list, fn [{'regex', v} | _] -> {:regex, to_string(v)} end)
   end
 
-  defp to_tuple(values, tuple \\ {})
-  defp to_tuple([], tuple), do: tuple
+  defp compile(groups) do
+    Enum.map(groups, &compile_group/1)
+  end
 
-  defp to_tuple([head | tail], tuple) do
-    tuple = Tuple.append(tuple, head)
-    to_tuple(tail, tuple)
+  defp compile_group({:regex, pattern}) do
+    regex = Regex.compile!(pattern)
+
+    %{regex: regex}
   end
 end

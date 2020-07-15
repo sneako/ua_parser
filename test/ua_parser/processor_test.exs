@@ -6,9 +6,8 @@ defmodule UAParser.ProcessorTest do
   test "converts yaml document into data structure" do
     result = Processor.process(test_data())
 
-    assert is_tuple(result)
-    assert tuple_size(result) == 3
-    assert [%{regex: pattern}] = elem(result, 1)
+    assert is_list(result)
+    assert [%{regex: pattern} | _] = result
     assert Regex.regex?(pattern)
   end
 

@@ -6,7 +6,9 @@ defmodule UAParser.Parser do
   @doc """
   Parse a user-agent string given a set of patterns
   """
-  def parse({_ua_patterns, os_patterns, _device_patterns}, user_agent) do
+  def parse(_os_patterns, nil), do: nil
+
+  def parse(os_patterns, user_agent) do
     sanitized = sanitize(user_agent)
 
     case extract(sanitized) do
@@ -38,6 +40,7 @@ defmodule UAParser.Parser do
   defp normalize("mac os x"), do: "macos"
   defp normalize("cros"), do: "chrome os"
   defp normalize("ubuntu"), do: "linux"
+  defp normalize("fedora"), do: "linux"
   defp normalize("debian"), do: "linux"
   defp normalize(other), do: other
 

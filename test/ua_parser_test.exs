@@ -93,7 +93,8 @@ defmodule UAParserTest do
 
   test "unknown" do
     [
-      "Opera/9.80 (J2ME/MIDP; Opera Mini/5.1.21214/28.2725; U; ru) Presto/2.8.119 Version/11.10"
+      "Opera/9.80 (J2ME/MIDP; Opera Mini/5.1.21214/28.2725; U; ru) Presto/2.8.119 Version/11.10",
+      nil
     ]
     |> Enum.each(fn ua ->
       assert ua |> UAParser.parse() |> is_nil()
