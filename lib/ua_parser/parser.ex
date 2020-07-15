@@ -18,6 +18,7 @@ defmodule UAParser.Parser do
     patterns
     |> search(user_agent)
     |> OperatingSystem.parse()
+    |> String.downcase()
   end
 
   defp sanitize(user_agent), do: String.trim(user_agent)
