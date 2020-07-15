@@ -30,10 +30,10 @@ defmodule UAParser.Processor do
   defp compile_group(group) do
     pattern =
       group
-      |> Keyword.fetch!(:regex)
+      |> Map.fetch!(:regex)
       |> Regex.compile!()
 
-    Keyword.put(group, :regex, pattern)
+    Map.put(group, :regex, pattern)
   end
 
   defp compile_groups(groups), do: Enum.map(groups, &compile_group/1)
@@ -41,15 +41,14 @@ defmodule UAParser.Processor do
   defp convert([]), do: []
 
   defp convert([head | tail]) do
-    result = Enum.map(head, &to_keyword/1)
+    result = Enum.map(head, fn x -> x |> to_keyword() |> Map.new() end)
     [result | convert(tail)]
   end
 
   defp extract([document | _]) do
-    [{'user_agent_parsers', user_agents}, {'os_parsers', os}, {'device_parsers', devices}] =
-      document
+    [_, {'os_parsers', os}, _] = document
 
-    [user_agents, os, devices]
+    [[], os, []]
   end
 
   defp to_keyword([]), do: []

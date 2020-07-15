@@ -3,18 +3,21 @@ defmodule UAParser.Parsers.OperatingSystem do
   A parser module representing the operating system derived
   from a user agent.
   """
-  import UAParser.Parsers.Base
+  def parse(nil), do: nil
 
-  alias UAParser.OperatingSystem
+  def parse({%{os_replacement: replacement}, match}) when is_binary(replacement) do
+    replace(replacement, 1, match)
+  end
 
-  replacement_parser(
-    struct: OperatingSystem,
-    keys: [
-      :os_replacement,
-      :os_v1_replacement,
-      :os_v2_replacement,
-      :os_v3_replacement,
-      :os_v4_replacement
-    ]
-  )
+  def parse({_, [_, match | _]}), do: match
+
+  def replace(string, position, match) do
+    val = Enum.at(match, position)
+
+    if val do
+      String.replace(string, "$#{position}", val)
+    else
+      string
+    end
+  end
 end

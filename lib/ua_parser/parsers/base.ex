@@ -6,7 +6,7 @@ defmodule UAParser.Parsers.Base do
   @callback parse(args :: term) :: result :: term | nil
 
   defmacro replacement_parser(opts) do
-    [family_key | replacements] = Keyword.fetch!(opts, :keys)
+    [family_key | _replacements] = Keyword.fetch!(opts, :keys)
     mod = opts[:struct]
 
     quote do
@@ -19,9 +19,8 @@ defmodule UAParser.Parsers.Base do
           |> UAParser.Parsers.Base.replace(1, match)
 
         match = Enum.slice(match, 1, 5)
-        version = UAParser.Parsers.Version.parse({group, match}, unquote(replacements))
 
-        struct(unquote(mod), %{family: family, version: version})
+        struct(unquote(mod), %{family: family, version: nil})
       end
     end
   end
