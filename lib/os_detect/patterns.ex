@@ -1,7 +1,7 @@
 defmodule OsDetect.Patterns do
-  @moduledoc """
-  Load pattern data at compile time. Recompiling the application is necessary after updating the pattern file.
-  """
+  @moduledoc false
+  #
+  # Load pattern data at compile time. Recompiling the application is necessary after updating the pattern file.
 
   alias OsDetect.Processor
 

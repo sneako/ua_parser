@@ -1,17 +1,14 @@
 defmodule OsDetect.Processor do
-  @moduledoc """
-  Prepare a raw YAML document for consumption by the parser by
-  converting charlists into strings and compiling our patterns.
-  """
+  @moduledoc false
 
-  @doc """
-  Process a document into Elixir keyword lists and compiled patterns
-  """
+  # Prepares a raw YAML document for consumption by the parser by
+  # converting charlists into strings and compiling our patterns.
+
   def process(document) do
     document
-    |> extract
-    |> convert
-    |> compile
+    |> extract()
+    |> convert()
+    |> compile()
   end
 
   defp extract([document | _]) do

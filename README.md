@@ -1,8 +1,8 @@
 # OsDetect
 
-A simple, fast user-agent parsing library based on BrowserScope's UA database with a good default dictionary.
+A simple, fast user-agent parsing library based on BrowserScope's UA database.
 
-This is a fork of beam-community/ua_parser, stripped down to only return the operating system family. It is much faster.
+This started as a fork of beam-community/ua_parser, stripped down to only return the operating system family. It is much faster and only returns the operating system name as a string.
 
 ## Installation
 
@@ -10,7 +10,9 @@ Add `ua_parser` to your `mix.exs` dependencies:
 
 ```elixir
 def deps do
-  [{:ua_parser, github: "sneako/ua_parser", branch: "os-family-only"}]
+  [
+    {:os_detect, "~> 0.1.0"}
+  ]
 end
 ```
 

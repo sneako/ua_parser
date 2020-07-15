@@ -1,6 +1,6 @@
 defmodule OsDetect do
   @moduledoc """
-  A fast User Agent parser with a widely used API.
+  A fast and User Agent parser which only returns the operating system.
   """
 
   alias OsDetect.Patterns
@@ -10,10 +10,14 @@ defmodule OsDetect do
 
   ## Examples
 
-      iex> agent_string = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7; en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0"
-      iex> OsDetect.parse(agent_string)
+      iex> OsDetect.parse("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36")
       "macos"
+      iex> OsDetect.parse("Mozilla/5.0 (Linux; Android 10; Pixel 3 XL Build/QQ3A.200605.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.106 Mobile Safari/537.36 GSA/11.18.11.21.arm64")
+      "android"
+      iex> OsDetect.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML}, like Gecko) FxiOS/7.5b3349 Mobile/14F89 Safari/603.2.4")
+      "ios"
   """
+  @spec parse(user_agent :: binary() | nil) :: operating_system :: binary() | nil
   def parse(nil), do: nil
 
   def parse(user_agent) do

@@ -1,50 +1,23 @@
-# Created by https://www.gitignore.io/api/vim,osx,elixir
+# The directory Mix will write compiled artifacts to.
+/_build/
 
-### Vim ###
-# swap
-[._]*.s[a-w][a-z]
-[._]s[a-w][a-z]
-# session
-Session.vim
-# temporary
-.netrwhist
-*~
-# auto-generated tag files
-tags
+# If you run "mix test --cover", coverage assets end up here.
+/cover/
 
+# The directory Mix downloads your dependencies sources to.
+/deps/
 
-### OSX ###
-*.DS_Store
-.AppleDouble
-.LSOverride
+# Where third-party dependencies like ExDoc output generated docs.
+/doc/
 
-# Icon must end with two \r
-Icon
-# Thumbnails
-._*
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# Ignore .fetch files in case you like to edit your project deps locally.
+/.fetch
 
-
-### Elixir ###
-/_build
-/cover
-/deps
+# If the VM crashes, it generates a dump, let's ignore it too.
 erl_crash.dump
-*.ez
-*.beam
 
-# The directory NPM downloads your dependencies sources to.
-/example/assets/node_modules/
+# Also ignore archive artifacts (built via "mix archive.build").
+*.ez
+
+# Ignore package tarball (built via "mix hex.build").
+os_detect-*.tar
