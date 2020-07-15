@@ -1,19 +1,27 @@
-defmodule UAParser.Parser do
+defmodule OsDetect do
   @moduledoc """
-  Handle parsing the user-agent string.
+  A fast User Agent parser with a widely used API.
   """
+
+  alias OsDetect.Patterns
 
   @doc """
-  Parse a user-agent string given a set of patterns
-  """
-  def parse(_os_patterns, nil), do: nil
+  Parse the operating system from a user-agent string
 
-  def parse(os_patterns, user_agent) do
+  ## Examples
+
+      iex> agent_string = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7; en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0"
+      iex> OsDetect.parse(agent_string)
+      "macos"
+  """
+  def parse(nil), do: nil
+
+  def parse(user_agent) do
     sanitized = sanitize(user_agent)
 
     case extract(sanitized) do
       extracted when is_binary(extracted) -> extracted
-      nil -> parse_os(sanitized, os_patterns)
+      nil -> parse_os(sanitized, Patterns.list())
     end
   end
 

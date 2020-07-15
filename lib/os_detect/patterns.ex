@@ -1,17 +1,16 @@
-defmodule UAParser.Storage do
+defmodule OsDetect.Patterns do
   @moduledoc """
   Load pattern data at compile time. Recompiling the application is necessary after updating the pattern file.
   """
 
-  alias UAParser.Processor
+  alias OsDetect.Processor
 
   Application.start(:yamerl)
 
   data =
-    :ua_parser
+    :os_detect
     |> :code.priv_dir()
-    |> Kernel.++('/patterns.yml')
-    |> to_string
+    |> Path.join("patterns.yml")
     |> :yamerl_constr.file([])
     |> Processor.process()
 

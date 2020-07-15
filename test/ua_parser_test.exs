@@ -1,6 +1,6 @@
-defmodule UAParserTest do
+defmodule OsDetectTest do
   use ExUnit.Case
-  doctest UAParser
+  doctest OsDetect
 
   test "android" do
     [
@@ -15,7 +15,7 @@ defmodule UAParserTest do
       "Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML}, like Gecko) Chrome/59.0.3071.125 Mobile Safari/537.36"
     ]
     |> Enum.each(fn ua ->
-      assert "android" == UAParser.parse(ua)
+      assert "android" == OsDetect.parse(ua)
     end)
   end
 
@@ -27,7 +27,7 @@ defmodule UAParserTest do
       "Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_4 like Mac OS X) AppleWebKit/536.26 (KHTML}, like Gecko) Version/6.0 Mobile/10B350 Safari/8536.25"
     ]
     |> Enum.each(fn ua ->
-      assert "ios" == UAParser.parse(ua)
+      assert "ios" == OsDetect.parse(ua)
     end)
   end
 
@@ -39,7 +39,7 @@ defmodule UAParserTest do
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"
     ]
     |> Enum.each(fn ua ->
-      assert "macos" == UAParser.parse(ua)
+      assert "macos" == OsDetect.parse(ua)
     end)
   end
 
@@ -51,7 +51,7 @@ defmodule UAParserTest do
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/18.17763"
     ]
     |> Enum.each(fn ua ->
-      assert "windows" == UAParser.parse(ua)
+      assert "windows" == OsDetect.parse(ua)
     end)
   end
 
@@ -65,7 +65,7 @@ defmodule UAParserTest do
       "Mozilla/5.0 (Windows Phone 10.0; Android 6.0.1; ALCATELONETOUCH; FierceXL) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Mobile Safari/537.36 Edge/15.15254"
     ]
     |> Enum.each(fn ua ->
-      assert "windows phone" == UAParser.parse(ua)
+      assert "windows phone" == OsDetect.parse(ua)
     end)
   end
 
@@ -78,7 +78,7 @@ defmodule UAParserTest do
       "Mozilla/5.0 (X11; U; Linux amd64; rv:5.0) Gecko/20100101 Firefox/5.0 (Debian)"
     ]
     |> Enum.each(fn ua ->
-      assert "linux" == UAParser.parse(ua)
+      assert "linux" == OsDetect.parse(ua)
     end)
   end
 
@@ -87,7 +87,7 @@ defmodule UAParserTest do
       "Mozilla/5.0 (X11; CrOS x86_64 12239.92.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.136 Safari/537.36"
     ]
     |> Enum.each(fn ua ->
-      assert "chrome os" == UAParser.parse(ua)
+      assert "chrome os" == OsDetect.parse(ua)
     end)
   end
 
@@ -97,14 +97,14 @@ defmodule UAParserTest do
       nil
     ]
     |> Enum.each(fn ua ->
-      assert ua |> UAParser.parse() |> is_nil()
+      assert ua |> OsDetect.parse() |> is_nil()
     end)
   end
 
   test "misc" do
     [{"mac_powerpc", "Mozilla/4.0 (compatible; MSIE 4.5; Mac_PowerPC)"}]
     |> Enum.each(fn {expected, ua} ->
-      assert expected == UAParser.parse(ua)
+      assert expected == OsDetect.parse(ua)
     end)
   end
 end

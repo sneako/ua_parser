@@ -1,7 +1,7 @@
-defmodule UAParser.ProcessorTest do
+defmodule OsDetect.ProcessorTest do
   use ExUnit.Case
 
-  alias UAParser.Processor
+  alias OsDetect.Processor
 
   test "converts yaml document into data structure" do
     result = Processor.process(test_data())
@@ -12,8 +12,9 @@ defmodule UAParser.ProcessorTest do
   end
 
   def test_data do
-    File.cwd!()
-    |> Path.join("test/fixtures/patterns.yml")
+    :os_detect
+    |> :code.priv_dir()
+    |> Path.join("patterns.yml")
     |> :yamerl_constr.file()
   end
 end

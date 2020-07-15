@@ -1,12 +1,12 @@
-defmodule UAParser.Mixfile do
+defmodule OsDetect.Mixfile do
   use Mix.Project
 
-  @version "2.0.0"
+  @version "0.1.0"
 
   def project do
     [
-      app: :ua_parser,
-      description: "Parse user-agent strings with BrowserScope patterns",
+      app: :os_detect,
+      description: "Parse operating system from user-agent strings with BrowserScope patterns",
       version: @version,
       elixir: "~> 1.4",
       build_embedded: Mix.env() == :prod,
@@ -22,8 +22,6 @@ defmodule UAParser.Mixfile do
   defp deps do
     [
       {:yamerl, "~> 0.7"},
-
-      # Development & Test dependencies
       {:credo, "~> 1.0.5", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
