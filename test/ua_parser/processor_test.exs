@@ -8,7 +8,7 @@ defmodule UAParser.ProcessorTest do
 
     assert is_tuple(result)
     assert tuple_size(result) == 3
-    assert [[{:regex, pattern}]] = elem(result, 0)
+    assert [%{regex: pattern}] = elem(result, 1)
     assert Regex.regex?(pattern)
   end
 
