@@ -12,9 +12,8 @@ defmodule UAParser do
 
       iex> agent_string = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7; en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0"
       iex> UAParser.parse(agent_string)
-      "mac os x"
+      "macos"
   """
-  def parse(nil), do: parse("")
   def parse(ua), do: parse(ua, default_pattern())
   def parse(ua, pattern), do: Parser.parse(pattern, ua)
 
