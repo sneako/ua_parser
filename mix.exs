@@ -1,7 +1,7 @@
 defmodule UAParser.Mixfile do
   use Mix.Project
 
-  @version "1.8.0"
+  @version "2.0.0"
 
   def project do
     [
@@ -11,7 +11,6 @@ defmodule UAParser.Mixfile do
       elixir: "~> 1.4",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      package: package(),
       deps: deps()
     ]
   end
@@ -27,15 +26,6 @@ defmodule UAParser.Mixfile do
       # Development & Test dependencies
       {:credo, "~> 1.0.5", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev}
-    ]
-  end
-
-  defp package do
-    [
-      maintainers: ["Sean Callan", "Nathan Youngman"],
-      files: ["lib", "mix.exs", "README*", "LICENSE*", "priv"],
-      licenses: ["Apache 2.0"],
-      links: %{github: "https://github.com/beam-community/ua_parser"}
     ]
   end
 end

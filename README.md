@@ -10,7 +10,7 @@ Add `ua_parser` to your `mix.exs` dependencies:
 
 ```elixir
 def deps do
-  [{:ua_parser, github: "sneako/ua_parser"}]
+  [{:ua_parser, github: "sneako/ua_parser", branch: "os-family-only"}]
 end
 ```
 
